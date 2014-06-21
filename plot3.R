@@ -8,7 +8,10 @@ NEI <- readRDS("data/summarySCC_PM25.rds")
 NEI <- NEI[NEI["fips"]=="24510",c(4:6)]
 NEI <- aggregate(. ~ type + year, data=NEI, FUN=sum)
 png(filename = "plot3.png", width = 480, height = 480)
-g <- ggplot(data=NEI, aes(x=year, y=Emissions, group=type, colour=type)) +
-  geom_line() + geom_point()
+g <- ggplot(NEI, aes(x = factor(year), y = Emissions))
+g <- g + geom_bar(stat = "identity")
+g <- g + facet_grid(. ~ type)
+g <- g + labs(title = expression(PM[2.5] * " Sources Over Time (Baltimore City)"))
+g <- g + labs(x = "Year", y = expression(PM[2.5]))
 print(g)
 dev.off()
