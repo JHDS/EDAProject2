@@ -10,7 +10,7 @@
 # Extraneous project related files
 *.zip
 archive/*
-data/*
+#data/*
 .Rproj.user
 *.Rproj
 .RData
